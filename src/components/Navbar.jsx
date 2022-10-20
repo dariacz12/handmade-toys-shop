@@ -27,7 +27,7 @@ const Right = styled.div`
   justify-content: flex-end;
 `;
 const Language = styled.span`
-  fount-size: 14px;
+  font-size: 14px;
   cursor: pointer;
 `;
 
