@@ -8,30 +8,40 @@ const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 const Left = styled.div`
   flex: 1;
 `;
-const Language = styled.span`
-  fount-size: 14px;
-  cursor: pointer;
-`;
 const Center = styled.div`
   flex: 1;
+  text-align: center;
+`;
+const Logo = styled.h1`
+  font-weight: bold;
 `;
 const Right = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+const Language = styled.span`
+  fount-size: 14px;
+  cursor: pointer;
 `;
 
 const Navbar = () => {
   return (
     <Container>
       <Wrapper>
-        <Left>
+        <Left></Left>
+        <Center>
+          <Logo>Irena's Projects</Logo>
+        </Center>
+        <Right>
           <Language>EN</Language>
-        </Left>
-        <Center>Center</Center>
-        <Right>Right</Right>
+        </Right>
       </Wrapper>
     </Container>
   );
