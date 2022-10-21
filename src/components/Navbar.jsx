@@ -1,29 +1,39 @@
 import React from "react";
 import styled from "styled-components";
+import Logotipe from "../images/logo.png";
 
 const Container = styled.div`
-  height: 60px;
+  display: flex;
+  max-height: 60px;
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 const Left = styled.div`
   flex: 1;
+  display: flex;
 `;
 const Center = styled.div`
+  display: flex;
   flex: 1;
-  text-align: center;
+  justify-content: center;
 `;
-const Logo = styled.h1`
-  font-weight: bold;
+const Logo = styled.div`
+  height: 100%;
+  display: flex;
+`;
+const Image = styled.img`
+  max-width: 100%;
+  max-height: 60px;
 `;
 const Right = styled.div`
+  display: flex;
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: flex-end;
 `;
 const Language = styled.span`
@@ -35,9 +45,11 @@ const Navbar = () => {
   return (
     <Container>
       <Wrapper>
-        <Left></Left>
+        <Left>.</Left>
         <Center>
-          <Logo>Irena's Projects</Logo>
+          <Logo>
+            <Image src={Logotipe} />
+          </Logo>
         </Center>
         <Right>
           <Language>EN</Language>
