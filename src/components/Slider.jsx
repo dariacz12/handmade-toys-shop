@@ -57,15 +57,25 @@ const InfoContainer = styled.div`
   margin: 0px 100px;
 `;
 const Title = styled.h1`
+  max-width: 50%;
   font-size: 70px;
   color: white;
   text-shadow: 4px 2px 6px rgba(66, 68, 90, 1);
+
+  @media ${devices.laptop} {
+    max-width: 100%;
+  }
 `;
 const Description = styled.p`
+  max-width: 50%;
   margin: 40px 0px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+
+  @media ${devices.laptop} {
+    max-width: 100%;
+  }
 `;
 const Button = styled.button`
   padding: 10px;

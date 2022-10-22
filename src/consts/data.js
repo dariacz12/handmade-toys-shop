@@ -6,6 +6,14 @@ import lalkiZTkanin from "../images/lalkiztkanin.jpg";
 import papiermache from "../images/papiermache.jpg";
 import szydelkowanie from "../images/szydełkowanie.jpg";
 import filcowanie from "../images/filcowanie.jpg";
+import product1 from "../images/1.jpg";
+import product2 from "../images/2.jpg";
+import product3 from "../images/3.jpg";
+import product4 from "../images/4.jpg";
+import product5 from "../images/5.jpg";
+import product6 from "../images/6.jpg";
+import product7 from "../images/7.jpg";
+import product8 from "../images/8.jpg";
 
 export const sliderItems = [
   {
@@ -46,12 +54,47 @@ export const categories = [
   },
   {
     id: 4,
-    img: `${lalkiZTkanin}`,
-    title: "LALKI Z TKANIN",
+    img: `${polimerowaGlina}`,
+    title: "POLIMEROWA GLINA",
   },
   {
     id: 5,
-    img: `${polimerowaGlina}`,
-    title: "POLIMEROWA GLINA",
+    img: `${lalkiZTkanin}`,
+    title: "LALKI Z TKANIN",
+  },
+];
+
+export const popularProducts = [
+  {
+    id: 1,
+    img: `${product1}`,
+  },
+  {
+    id: 2,
+    img: `${product2}`,
+  },
+  {
+    id: 3,
+    img: `${product3}`,
+  },
+  {
+    id: 4,
+    img: `${product4}`,
+  },
+  {
+    id: 5,
+    img: `${product5}`,
+  },
+  {
+    id: 6,
+    img: `${product6}`,
+  },
+  {
+    id: 7,
+    img: `${product7}`,
+  },
+  {
+    id: 8,
+    img: `${product8}`,
   },
 ];

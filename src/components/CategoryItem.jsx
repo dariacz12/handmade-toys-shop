@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   flex: 2 1 600px;
-  margin: 10px;
+  margin: 20px;
   height: 70vh;
   position: relative;
 `;
