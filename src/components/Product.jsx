@@ -14,7 +14,7 @@ const Image = styled.img`
   transition: all 0.5s ease;
   &:hover {
     opacity: 0.5;
-    transform: scale(1.05);
+    transform: scale(1.02);
     cursor: pointer;
   }
 `;

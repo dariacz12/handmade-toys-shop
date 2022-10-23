@@ -26,6 +26,7 @@ const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
   text-align: center;
+  text-shadow: 4px 2px 6px rgba(66, 68, 90, 1);
 `;
 const Button = styled.button`
   border: none;
@@ -34,6 +35,11 @@ const Button = styled.button`
   color: gray;
   cursor: pointer;
   font-weight: 600;
+  &:hover {
+    background-color: teal;
+    color: white;
+    border-color: teal;
+  }
 `;
 const CategoryItem = ({ item }) => {
   return (
