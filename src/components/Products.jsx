@@ -13,6 +13,7 @@ const Title = styled.h1`
   font-weight: 500;
   letter-spacing: 3px;
   padding: 10px 0px;
+  color: teal;
 `;
 const Items = styled.div`
   padding: 40px;
