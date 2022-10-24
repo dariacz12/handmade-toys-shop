@@ -40,27 +40,27 @@ export const categories = [
   {
     id: 1,
     img: `${papiermache}`,
-    title: "PAPIER MACHE",
+    title: "Papier mache",
   },
   {
     id: 2,
     img: `${szydelkowanie}`,
-    title: "SZYDYŁKOWANIE",
+    title: "Szydełkowanie",
   },
   {
     id: 3,
     img: `${filcowanie}`,
-    title: "FILCOWANIE NA SUCHO",
+    title: "Filcowanie na sucho",
   },
   {
     id: 4,
     img: `${polimerowaGlina}`,
-    title: "POLIMEROWA GLINA",
+    title: "Polimerowa glina",
   },
   {
     id: 5,
     img: `${lalkiZTkanin}`,
-    title: "LALKI Z TKANIN",
+    title: "Lalki z tkanin",
   },
 ];
 
