@@ -9,11 +9,14 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 const Title = styled.h1`
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 500;
   letter-spacing: 3px;
-  padding: 10px 0px;
+  padding-top: 20px;
   color: teal;
+  @media ${devices.mobileL} {
+    font-size: 25px;
+  } ;
 `;
 const Items = styled.div`
   padding: 40px;

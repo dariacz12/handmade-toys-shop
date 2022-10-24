@@ -27,6 +27,7 @@ const Title = styled.h1`
   margin-bottom: 20px;
   text-align: center;
   text-shadow: 4px 2px 6px rgba(66, 68, 90, 1);
+  text-transform: uppercase;
 `;
 const Button = styled.button`
   border: none;
