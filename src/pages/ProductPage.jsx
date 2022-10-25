@@ -3,7 +3,10 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { devices } from "../consts/deviceSizes";
-import lalka from "../images/1.jpg";
+import { productImages } from "../consts/data";
+import { ArrowForwardIos } from "@material-ui/icons";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -14,11 +17,14 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px;
+  padding: 30px;
+  @media ${devices.laptop} {
+    padding: 50px 100px;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: 70%;
   justify-content: space-between;
   flex-wrap: wrap;
   flex-direction: column;
@@ -26,25 +32,26 @@ const Wrapper = styled.div`
     flex-direction: row;
     padding: 50px;
     max-width: 1500px;
+    width: 100%;
   }
 `;
 const ImgContainer = styled.div`
   display: flex;
   flex: 2;
-  justify-content: space-around;
-  min-width: 400px;
+  justify-content: space-between;
   margin-bottom: 50px;
   position: relative;
   @media ${devices.laptopL} {
     margin-bottom: 0px;
     position: static;
+    min-width: 400px;
   }
 `;
 const ImageAdditional = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 20%;
+  width: 30%;
   position: absolute;
   @media ${devices.laptopL} {
     position: static;
@@ -57,16 +64,46 @@ const Image = styled.img`
     display: flex;
   }
 `;
+const ImageMainContainer = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  @media ${devices.laptopL} {
+    margin-left: 30px;
+  }
+`;
+const Arrow = styled.div`
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.5;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: ${(props) => props.direction === "left" && "10px"};
+  right: ${(props) => props.direction === "right" && "10px"};
+  z-index: 2;
+  @media ${devices.laptopL} {
+    width: 50px;
+    height: 50px;
+  }
+`;
 const ImageMain = styled.img`
   width: 100%;
   @media ${devices.laptopL} {
-    width: 70%;
+    width: 100%;
   }
 `;
 const InfoContainer = styled.div`
   flex: 1;
-
-  min-width: 300px;
+  min-width: 250px;
 
   @media ${devices.laptopL} {
     padding: 0px 50px;
@@ -80,12 +117,31 @@ const Description = styled.p`
   margin: 20px 0px;
   color: gray;
   text-align: justify;
+  font-size: 14px;
+  @media ${devices.mobileL} {
+    font-size: 16px;
+  }
 `;
 const Price = styled.span`
   font-weight: 100;
-  font-size: 40px;
+  font-size: 30px;
+  @media ${devices.laptopL} {
+    font-size: 40px;
+  }
 `;
 const ProductPage = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
+  const onImageClick = (id) => {
+    setSlideIndex(id);
+  };
+
   return (
     <Container>
       <Navbar />
@@ -94,11 +150,19 @@ const ProductPage = () => {
         <Wrapper>
           <ImgContainer>
             <ImageAdditional>
-              <Image src={lalka} />
-              <Image src={lalka} />
-              <Image src={lalka} />
+              {productImages.map(({ id, img }) => (
+                <Image src={img} key={id} onClick={() => onImageClick(id)} />
+              ))}
             </ImageAdditional>
-            <ImageMain src={lalka} />
+            <ImageMainContainer>
+              <Arrow direction="left" onClick={() => handleClick("left")}>
+                <ArrowBackIosNewIcon />
+              </Arrow>
+              <ImageMain src={productImages[slideIndex].img} />
+              <Arrow direction="right" onClick={() => handleClick("right")}>
+                <ArrowForwardIos />
+              </Arrow>
+            </ImageMainContainer>
           </ImgContainer>
           <InfoContainer>
             <Title>Lorem ipsum</Title>

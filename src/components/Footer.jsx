@@ -14,9 +14,11 @@ const Container = styled.div`
   background-size: cover;
   background-position: center;
   padding: 40px;
+  font-size: 14px;
   @media ${devices.tablet} {
     flex-direction: row;
     padding: 40px 40px 40px 170px;
+    font-size: 16px;
   }
 `;
 const Left = styled.div`
@@ -36,6 +38,10 @@ const Title1 = styled.h1`
   letter-spacing: 2px;
   color: whitesmoke;
   text-shadow: 2px 1px 4px rgba(66, 68, 90, 1);
+  font-size: 14px;
+  @media ${devices.tablet} {
+    font-size: 18px;
+  }
 `;
 const List = styled.ul`
   margin: 0;
@@ -63,6 +69,10 @@ const Title2 = styled.h1`
   letter-spacing: 2px;
   color: whitesmoke;
   text-shadow: 2px 1px 4px rgba(66, 68, 90, 1);
+  font-size: 14px;
+  @media ${devices.tablet} {
+    font-size: 18px;
+  }
 `;
 const ContactItem = styled.div`
   margin-bottom: 12px;
