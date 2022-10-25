@@ -60,6 +60,11 @@ const ImageAdditional = styled.div`
 const Image = styled.img`
   width: 100%;
   display: none;
+  &:hover {
+    opacity: 0.5;
+    transform: scale(1.02);
+    cursor: pointer;
+  }
   @media ${devices.laptopL} {
     display: flex;
   }
@@ -97,6 +102,7 @@ const Arrow = styled.div`
 `;
 const ImageMain = styled.img`
   width: 100%;
+
   @media ${devices.laptopL} {
     width: 100%;
   }
