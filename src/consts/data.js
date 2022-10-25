@@ -14,6 +14,9 @@ import product5 from "../images/5.jpg";
 import product6 from "../images/6.jpg";
 import product7 from "../images/7.jpg";
 import product8 from "../images/8.jpg";
+import productImage1 from "../images/productImage1.jpg";
+import productImage2 from "../images/productImage2.jpg";
+import productImage3 from "../images/productImage3.jpg";
 
 export const sliderItems = [
   {
@@ -96,5 +99,20 @@ export const popularProducts = [
   {
     id: 8,
     img: `${product8}`,
+  },
+];
+
+export const productImages = [
+  {
+    id: 0,
+    img: `${productImage1}`,
+  },
+  {
+    id: 1,
+    img: `${productImage2}`,
+  },
+  {
+    id: 2,
+    img: `${productImage3}`,
   },
 ];
