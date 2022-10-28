@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logotipe from "../images/logo.png";
 import footer from "../images/footer.jpg";
 import { devices } from "../consts/deviceSizes";
-import { Instagram, MailOutline, Phone, Room } from "@material-ui/icons";
+import ContactData from "./ContactData";
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -61,27 +61,6 @@ const Right = styled.div`
   flex: 4;
   padding-top: 20px;
 `;
-const Title2 = styled.h1`
-  margin: 20px 0px;
-  padding-top: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  color: whitesmoke;
-  text-shadow: 2px 1px 4px rgba(66, 68, 90, 1);
-  font-size: 14px;
-  @media ${devices.tablet} {
-    font-size: 18px;
-  }
-`;
-const ContactItem = styled.div`
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  color: whitesmoke;
-  text-shadow: 2px 1px 4px rgba(66, 68, 90, 1);
-  cursor: pointer;
-`;
 
 const Footer = () => {
   return (
@@ -100,23 +79,7 @@ const Footer = () => {
         </List>
       </Left>
       <Right>
-        <Title2>KONTAKT</Title2>
-        <ContactItem>
-          <Room style={{ marginRight: "10px" }} />
-          Bielsko-Biała, Polska
-        </ContactItem>
-        <ContactItem>
-          <Phone style={{ marginRight: "10px" }} />
-          +48 883 172 180
-        </ContactItem>
-        <ContactItem>
-          <MailOutline style={{ marginRight: "10px" }} />
-          irenas@handmade.com
-        </ContactItem>
-        <ContactItem>
-          <Instagram style={{ marginRight: "10px" }} />
-          Sosialmedia
-        </ContactItem>
+        <ContactData />
       </Right>
     </Container>
   );
