@@ -109,7 +109,6 @@ const Title2 = styled.h2`
 `;
 const InfoContainer = styled.div`
   color: #1a1a1a;
-  background-color: rgb(0, 128, 128, 0.1);
   padding: 10px;
   margin: 20px 10px 30px 10px;
   display: flex;
