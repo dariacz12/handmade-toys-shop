@@ -1,12 +1,14 @@
 // import Home from "./pages/Home";
 // import ProductList from "./pages/ProductList";
 // import ProductPage from "./pages/ProductPage";
-import AboutMe from "./pages/AboutMe";
+// import AboutMe from "./pages/AboutMe";
+import ContactPage from "./pages/ContactPage";
 
 const App = () => {
   return (
     <div>
-      <AboutMe />
+      <ContactPage />
+      {/* <AboutMe /> */}
       {/* <ProductPage /> */}
       {/* <ProductList/> */}
     </div>
