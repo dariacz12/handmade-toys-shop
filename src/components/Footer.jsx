@@ -74,7 +74,6 @@ const Footer = () => {
           <ListItem>O Mnie</ListItem>
           <ListItem>Kategorie</ListItem>
           <ListItem>Kontakt</ListItem>
-          <ListItem>Złoźenie zamówienia</ListItem>
           <ListItem>Dostawa</ListItem>
         </List>
       </Left>
