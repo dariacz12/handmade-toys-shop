@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { devices } from "../consts/deviceSizes";
 import Logotipe from "../images/logo.png";
+import Menu from "./Menu";
 
 const Container = styled.div`
   display: flex;
@@ -19,9 +21,13 @@ const Left = styled.div`
 `;
 const Center = styled.div`
   display: flex;
-  flex: 1;
+  flex: 2;
   justify-content: center;
+  @media ${devices.laptopL} {
+    flex: 1;
+  }
 `;
+
 const Logo = styled.div`
   height: 100%;
   display: flex;
@@ -39,20 +45,23 @@ const Right = styled.div`
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
+  padding: 18px 10px;
 `;
 
 const Navbar = () => {
   return (
     <Container>
       <Wrapper>
-        <Left>.</Left>
+        <Left>
+          <Language>EN</Language>
+        </Left>
         <Center>
           <Logo>
             <Image src={Logotipe} />
           </Logo>
         </Center>
         <Right>
-          <Language>EN</Language>
+          <Menu />
         </Right>
       </Wrapper>
     </Container>
