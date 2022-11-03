@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { popularProducts } from "../consts/data";
 import { devices } from "../consts/deviceSizes";
@@ -37,11 +38,13 @@ const Products = () => {
   return (
     <Container>
       <Title>NAJCZĘŚCIEJ KUPOWANE</Title>
-      <Items>
-        {popularProducts.map((item) => (
-          <Product key={item.id} item={item} />
-        ))}
-      </Items>
+      <Link to="/productpage/:id">
+        <Items>
+          {popularProducts.map((item) => (
+            <Product key={item.id} item={item} />
+          ))}
+        </Items>
+      </Link>
     </Container>
   );
 };

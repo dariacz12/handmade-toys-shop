@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 const Container = styled.div``;
 const Wrapper = styled.div`
   max-width: 1000px;
+  min-height: 650px;
   margin: 0px 20px;
   margin-top: 50px;
   display: flex;

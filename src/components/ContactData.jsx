@@ -28,10 +28,17 @@ const ContactData = ({ styleTitle, styleText, styleIcon }) => {
   return (
     <div>
       <Title2 style={styleTitle}>KONTAKT</Title2>
-      <ContactItem style={styleText}>
-        <Room style={{ marginRight: "10px", ...styleIcon }} />
-        Bielsko-Biała, Polska
-      </ContactItem>
+      <a
+        href="https://goo.gl/maps/W8YJKjLWJbHfjNbHA"
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "inherit", textDecoration: "inherit" }}
+      >
+        <ContactItem style={styleText}>
+          <Room style={{ marginRight: "10px", ...styleIcon }} />
+          Bielsko-Biała, Polska
+        </ContactItem>
+      </a>
       <ContactItem style={styleText}>
         <Phone style={{ marginRight: "10px", ...styleIcon }} />
         +48 883 172 180
@@ -40,10 +47,17 @@ const ContactData = ({ styleTitle, styleText, styleIcon }) => {
         <MailOutline style={{ marginRight: "10px", ...styleIcon }} />
         irenas@handmade.com
       </ContactItem>
-      <ContactItem style={styleText}>
-        <Instagram style={{ marginRight: "10px", ...styleIcon }} />
-        Sosialmedia
-      </ContactItem>
+      <a
+        href="https://www.instagram.com/irena_handmade_projects/?igshid=YmMyMTA2M2Y%3D&fbclid=IwAR3m9wvz7bawE0DZsltbLSNhH0_ryIT6pF9RtKdbxHbQNhL5LINKN7lqNnw"
+        target="_blank"
+        rel="noreferrer"
+        style={{ color: "inherit", textDecoration: "inherit" }}
+      >
+        <ContactItem style={styleText}>
+          <Instagram style={{ marginRight: "10px", ...styleIcon }} />
+          Sosialmedia
+        </ContactItem>
+      </a>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { devices } from "../consts/deviceSizes";
 import Logotipe from "../images/logo.png";
@@ -27,7 +28,6 @@ const Center = styled.div`
     flex: 1;
   }
 `;
-
 const Logo = styled.div`
   height: 100%;
   display: flex;
@@ -47,7 +47,10 @@ const Language = styled.span`
   cursor: pointer;
   padding: 18px 10px;
 `;
-
+const linkStyle = {
+  maxWidth: "100%",
+  maxHeight: "60px",
+};
 const Navbar = () => {
   return (
     <Container>
@@ -57,7 +60,9 @@ const Navbar = () => {
         </Left>
         <Center>
           <Logo>
-            <Image src={Logotipe} />
+            <Link to="/" style={linkStyle}>
+              <Image src={Logotipe} />
+            </Link>
           </Logo>
         </Center>
         <Right>
