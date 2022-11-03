@@ -23,10 +23,17 @@ const Menu = () => {
   let menuRef = useRef();
 
   useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (!menuRef.current.contains(event.target)) setIsMenuOpen(false);
+    const eventLisener = document.addEventListener("mousedown", (event) => {
+      if (!menuRef.current?.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+      document.removeEventListener("mousedown", eventLisener);
     });
-  });
+
+    return () => {
+      setIsMenuOpen(false);
+    };
+  }, []);
 
   return (
     <Container>

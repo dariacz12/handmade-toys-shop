@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Logotipe from "../images/logo.png";
 import footer from "../images/footer.jpg";
+import { NavLink } from "react-router-dom";
 import { devices } from "../consts/deviceSizes";
 import ContactData from "./ContactData";
 
@@ -71,10 +72,30 @@ const Footer = () => {
         </Logo>
         <Title1>PRZYDATNE LINKI</Title1>
         <List>
-          <ListItem>O Mnie</ListItem>
-          <ListItem>Kategorie</ListItem>
-          <ListItem>Kontakt</ListItem>
-          <ListItem>Dostawa</ListItem>
+          <NavLink
+            to="/aboutme"
+            style={{ color: "inherit", textDecoration: "inherit" }}
+          >
+            <ListItem>O Mnie</ListItem>
+          </NavLink>
+          <NavLink
+            to="/#categories"
+            style={{ color: "inherit", textDecoration: "inherit" }}
+          >
+            <ListItem>Kategorie</ListItem>
+          </NavLink>
+          <NavLink
+            to="/contactpage"
+            style={{ color: "inherit", textDecoration: "inherit" }}
+          >
+            <ListItem>Kontakt</ListItem>
+          </NavLink>
+          <NavLink
+            to="/contactpage"
+            style={{ color: "inherit", textDecoration: "inherit" }}
+          >
+            <ListItem>Dostawa</ListItem>
+          </NavLink>
         </List>
       </Left>
       <Right>

@@ -69,11 +69,8 @@ const ProductList = () => {
       <FilterContainer>
         <Filters>
           <Filter>
-            <FilterText>Filtruj Produkty:</FilterText>
+            <FilterText>Wybierz Kategorię:</FilterText>
             <Select>
-              <Option disabled selected>
-                Kategoria
-              </Option>
               <Option key={0}>All</Option>
               {categories.map((item) => (
                 <Option value={item.id} key={item.id}>
@@ -86,9 +83,7 @@ const ProductList = () => {
           <Filter>
             <FilterText>Sortuj Produkty:</FilterText>
             <Select>
-              <Option disabled selected>
-                Najnowsze
-              </Option>
+              <Option disabled>Najnowsze</Option>
               <Option>Cena rosnąco</Option>
               <Option>Cena malejąco</Option>
             </Select>

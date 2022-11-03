@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { devices } from "../consts/deviceSizes";
 
 const Container = styled.div`
@@ -30,6 +31,7 @@ const RightMenu = ({ isMenuOpen, innerRef }) => {
           ? {
               position: "fixed",
               display: "flex",
+              zIndex: "3",
               flexDirection: "column",
               width: "45%",
               height: "100vh",
@@ -51,10 +53,30 @@ const RightMenu = ({ isMenuOpen, innerRef }) => {
             : undefined
         }
       >
-        <ListItem>O Mnie</ListItem>
-        <ListItem>Kategorie</ListItem>
-        <ListItem>Kontakt</ListItem>
-        <ListItem>Dostawa</ListItem>
+        <NavLink
+          to="/aboutme"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          <ListItem>O Mnie</ListItem>
+        </NavLink>
+        <NavLink
+          to="/#categories"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          <ListItem>Kategorie</ListItem>
+        </NavLink>
+        <NavLink
+          to="/contactpage"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          <ListItem>Kontakt</ListItem>
+        </NavLink>
+        <NavLink
+          to="/contactpage"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          <ListItem>Dostawa</ListItem>
+        </NavLink>
       </List>
     </Container>
   );
