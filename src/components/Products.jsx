@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { popularProducts } from "../consts/data";
+// import { popularProducts } from "../consts/data";
 import { devices } from "../consts/deviceSizes";
 import Product from "./Product";
+import { db } from "../firebase";
+import { useState } from "react";
+import { useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
 `;
 const Title = styled.h1`
   font-size: 18px;
@@ -35,16 +40,36 @@ const Items = styled.div`
 `;
 
 const Products = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
+
   return (
     <Container>
       <Title>NAJCZĘŚCIEJ KUPOWANE</Title>
-      <Link to="/productpage/:id">
-        <Items>
-          {popularProducts.map((item) => (
+      <Items>
+        {data.map((item) => (
+          <Link to={"/productpage/" + item.id}>
             <Product key={item.id} item={item} />
-          ))}
-        </Items>
-      </Link>
+          </Link>
+        ))}
+      </Items>
     </Container>
   );
 };

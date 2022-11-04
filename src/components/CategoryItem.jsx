@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   flex: 2 1 600px;
   margin: 20px;
-  height: 70vh;
+  height: 50vh;
   position: relative;
   cursor: pointer;
 `;

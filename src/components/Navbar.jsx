@@ -56,7 +56,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Language>EN</Language>
+          <Language>PL</Language>
         </Left>
         <Center>
           <Logo>
