@@ -3,10 +3,13 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { devices } from "../consts/deviceSizes";
-import { productImages } from "../consts/data";
 import { ArrowForwardIos } from "@material-ui/icons";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -137,16 +140,37 @@ const Price = styled.span`
 `;
 const ProductPage = () => {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [data, setData] = useState([]);
+
   const handleClick = (direction) => {
     if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : data.photo.length - 1);
     } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex < data.photo.length - 1 ? slideIndex + 1 : 0);
     }
   };
-  const onImageClick = (id) => {
-    setSlideIndex(id);
+  const onImageClick = (index) => {
+    setSlideIndex(index);
   };
+
+  let { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setData(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   return (
     <Container>
@@ -156,32 +180,29 @@ const ProductPage = () => {
         <Wrapper>
           <ImgContainer>
             <ImageAdditional>
-              {productImages.map(({ id, img }) => (
-                <Image src={img} key={id} onClick={() => onImageClick(id)} />
-              ))}
+              {data.photo?.length &&
+                data.photo.map((image, index) => (
+                  <Image
+                    src={image}
+                    key={index}
+                    onClick={() => onImageClick(index)}
+                  />
+                ))}
             </ImageAdditional>
             <ImageMainContainer>
               <Arrow direction="left" onClick={() => handleClick("left")}>
                 <ArrowBackIosNewIcon />
               </Arrow>
-              <ImageMain src={productImages[slideIndex].img} />
+              <ImageMain src={data.photo?.[slideIndex]} />
               <Arrow direction="right" onClick={() => handleClick("right")}>
                 <ArrowForwardIos />
               </Arrow>
             </ImageMainContainer>
           </ImgContainer>
           <InfoContainer>
-            <Title>Lorem ipsum</Title>
-            <Description>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Description>
-            <Price>120 PLN</Price>
+            <Title>{data.displayName}</Title>
+            <Description>{data.description}</Description>
+            <Price>{data.price} PLN</Price>
           </InfoContainer>
         </Wrapper>
       </Content>

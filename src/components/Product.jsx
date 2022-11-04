@@ -21,9 +21,7 @@ const Image = styled.img`
 
 const Product = ({ item }) => {
   return (
-    <Container>
-      <Image src={item.img} />
-    </Container>
+    <Container>{item.photo.length && <Image src={item.photo[0]} />}</Container>
   );
 };
 
