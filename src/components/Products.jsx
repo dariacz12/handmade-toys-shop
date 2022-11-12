@@ -65,7 +65,7 @@ const Products = () => {
       <Title>NAJCZĘŚCIEJ KUPOWANE</Title>
       <Items>
         {data.map((item) => (
-          <Link to={"/productpage/" + item.id}>
+          <Link to={"/productpage/" + item.id} key={item.id}>
             <Product key={item.id} item={item} />
           </Link>
         ))}

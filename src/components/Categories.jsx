@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import React, { useEffect } from "react";
-import { categories } from "../consts/data";
+import React, { useEffect, useState } from "react";
 import CategoryItem from "./CategoryItem";
 import { useLocation } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +18,24 @@ const Items = styled.div`
   flex-wrap: wrap;
 `;
 const Categories = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -33,7 +52,7 @@ const Categories = () => {
   return (
     <Container id="categories">
       <Items>
-        {categories.map((item) => (
+        {data.map((item) => (
           <CategoryItem key={item.id} item={item} />
         ))}
       </Items>

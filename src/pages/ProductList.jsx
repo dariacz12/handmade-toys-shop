@@ -1,10 +1,13 @@
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Products from "../components/Products";
-import { categories } from "../consts/data";
+import Product from "../components/Product";
 import { devices } from "../consts/deviceSizes";
+import { db } from "../firebase";
 
 const Container = styled.div`
   display: flex;
@@ -61,7 +64,92 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
+const ContainerProduct = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+`;
+const Title = styled.h1`
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  padding-top: 20px;
+  color: teal;
+  @media ${devices.mobileL} {
+    font-size: 25px;
+  } ;
+`;
+const Items = styled.div`
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1920px;
+
+  @media ${devices.tabletXL} {
+    justify-content: space-around;
+  }
+  @media ${devices.laptopL} {
+    justify-content: space-between;
+  } ;
+`;
+
 const ProductList = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+    return () => {
+      setData([]);
+    };
+  }, []);
+
+  const [categorySeletcData, setCategorySelectData] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    categorySeletcData !== "all"
+      ? categorySeletcData && navigate(`/productlist/${categorySeletcData}`)
+      : navigate("/productlist");
+  }, [categorySeletcData, navigate]);
+
+  const { id } = useParams();
+
+  const [productsData, setProductsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let list = [];
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        querySnapshot.forEach((doc) => {
+          id
+            ? doc.data().categoryId === id &&
+              list.push({ id: doc.id, ...doc.data() })
+            : list.push({ id: doc.id, ...doc.data() });
+        });
+
+        setProductsData(list);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [id]);
+
   return (
     <Container>
       <Navbar />
@@ -70,11 +158,17 @@ const ProductList = () => {
         <Filters>
           <Filter>
             <FilterText>Wybierz Kategorię:</FilterText>
-            <Select>
-              <Option key={0}>All</Option>
-              {categories.map((item) => (
-                <Option value={item.id} key={item.id}>
-                  {item.title}
+            <Select
+              onChange={(event) =>
+                setCategorySelectData(String(event.target.value))
+              }
+            >
+              <Option value={"all"} key={0}>
+                All
+              </Option>
+              {data.map(({ categoryName, id }) => (
+                <Option value={id} key={categoryName}>
+                  {categoryName}
                 </Option>
               ))}
               ;
@@ -90,7 +184,18 @@ const ProductList = () => {
           </Filter>
         </Filters>
       </FilterContainer>
-      <Products />
+      <ContainerProduct>
+        <Title>
+          {data.find(({ id }) => id === categorySeletcData)?.categoryName}
+        </Title>
+        <Items>
+          {productsData.map((item) => (
+            <Link to={"/productpage/" + item.id} key={item.id}>
+              <Product key={item.id} item={item} />
+            </Link>
+          ))}
+        </Items>
+      </ContainerProduct>
       <Footer />
     </Container>
   );
