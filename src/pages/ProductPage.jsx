@@ -144,9 +144,13 @@ const ProductPage = () => {
 
   const handleClick = (direction) => {
     if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : data.photo.length - 1);
+      setSlideIndex(
+        slideIndex > 0 ? slideIndex - 1 : data.imagesRef.length - 1
+      );
     } else {
-      setSlideIndex(slideIndex < data.photo.length - 1 ? slideIndex + 1 : 0);
+      setSlideIndex(
+        slideIndex < data.imagesRef.length - 1 ? slideIndex + 1 : 0
+      );
     }
   };
   const onImageClick = (index) => {
@@ -172,6 +176,8 @@ const ProductPage = () => {
     fetchData();
   }, [id]);
 
+  console.log(1, data);
+
   return (
     <Container>
       <Navbar />
@@ -180,8 +186,8 @@ const ProductPage = () => {
         <Wrapper>
           <ImgContainer>
             <ImageAdditional>
-              {data.photo?.length &&
-                data.photo.map((image, index) => (
+              {data.imagesRef?.length &&
+                data.imagesRef.map((image, index) => (
                   <Image
                     src={image}
                     key={index}
@@ -193,7 +199,7 @@ const ProductPage = () => {
               <Arrow direction="left" onClick={() => handleClick("left")}>
                 <ArrowBackIosNewIcon />
               </Arrow>
-              <ImageMain src={data.photo?.[slideIndex]} />
+              <ImageMain src={data.imagesRef?.[slideIndex]} />
               <Arrow direction="right" onClick={() => handleClick("right")}>
                 <ArrowForwardIos />
               </Arrow>
