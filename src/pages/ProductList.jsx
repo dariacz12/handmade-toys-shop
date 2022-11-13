@@ -116,8 +116,8 @@ const ProductList = () => {
       setData([]);
     };
   }, []);
-
-  const [categorySeletcData, setCategorySelectData] = useState();
+  const { id } = useParams();
+  const [categorySeletcData, setCategorySelectData] = useState(id);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -125,8 +125,6 @@ const ProductList = () => {
       ? categorySeletcData && navigate(`/productlist/${categorySeletcData}`)
       : navigate("/productlist");
   }, [categorySeletcData, navigate]);
-
-  const { id } = useParams();
 
   const [productsData, setProductsData] = useState([]);
 

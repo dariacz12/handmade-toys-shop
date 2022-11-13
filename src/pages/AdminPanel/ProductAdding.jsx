@@ -111,7 +111,7 @@ const ProductAdding = () => {
           Send images
         </button>
         <input {...register("price")} />
-        <select {...register("categoryName")}>
+        <select {...register("categoryId")}>
           {categoryData.map(({ categoryName, id }) => (
             <option value={id} key={categoryName}>
               {categoryName}
