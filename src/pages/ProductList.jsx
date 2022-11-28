@@ -12,10 +12,10 @@ import { db } from "../firebase";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100vh;
 `;
 const FilterContainer = styled.div`
   display: flex;
-  flex: 1;
   justify-content: center;
   margin-bottom: 40px;
   @media ${devices.mobileL} {
@@ -66,6 +66,7 @@ const Option = styled.option``;
 
 const ContainerProduct = styled.div`
   display: flex;
+  flex: 1;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
