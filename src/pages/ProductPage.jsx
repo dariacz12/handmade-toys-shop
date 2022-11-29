@@ -187,13 +187,22 @@ const ProductPage = () => {
           <ImgContainer>
             <ImageAdditional>
               {data.imagesRef?.length &&
-                data.imagesRef.map((image, index) => (
-                  <Image
-                    src={image}
-                    key={index}
-                    onClick={() => onImageClick(index)}
-                  />
-                ))}
+                data.imagesRef.map((image, index) =>
+                  index >= 3 ? (
+                    <Image
+                      style={{ display: "none" }}
+                      src={image}
+                      key={index}
+                      onClick={() => onImageClick(index)}
+                    />
+                  ) : (
+                    <Image
+                      src={image}
+                      key={index}
+                      onClick={() => onImageClick(index)}
+                    />
+                  )
+                )}
             </ImageAdditional>
             <ImageMainContainer>
               <Arrow direction="left" onClick={() => handleClick("left")}>

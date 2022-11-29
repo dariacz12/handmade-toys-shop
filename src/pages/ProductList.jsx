@@ -77,6 +77,7 @@ const Title = styled.h1`
   letter-spacing: 3px;
   padding-top: 20px;
   color: teal;
+  text-transform: uppercase;
   @media ${devices.mobileL} {
     font-size: 25px;
   } ;
@@ -95,6 +96,10 @@ const Items = styled.div`
     justify-content: space-between;
   } ;
 `;
+
+const priceDescending = "price descending";
+const priceAscending = "price ascending";
+const newest = "newest";
 
 const ProductList = () => {
   const [data, setData] = useState([]);
@@ -129,26 +134,48 @@ const ProductList = () => {
 
   const [productsData, setProductsData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let list = [];
-      try {
-        const querySnapshot = await getDocs(collection(db, "products"));
-        querySnapshot.forEach((doc) => {
-          id
-            ? doc.data().categoryId === id &&
-              list.push({ id: doc.id, ...doc.data() })
-            : list.push({ id: doc.id, ...doc.data() });
-        });
+  const fetchData = async () => {
+    let list = [];
+    try {
+      const querySnapshot = await getDocs(collection(db, "products"));
+      querySnapshot.forEach((doc) => {
+        id
+          ? doc.data().categoryId === id &&
+            list.push({ id: doc.id, ...doc.data() })
+          : list.push({ id: doc.id, ...doc.data() });
+      });
 
-        setProductsData(list);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+      setProductsData(list);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, [id]);
 
+  const [sortSelectData, setSortSelectData] = useState();
+
+  console.log("sortSelectData1", sortSelectData);
+  useEffect(() => {
+    if (sortSelectData === priceAscending) {
+      setProductsData(
+        [...productsData].sort(
+          ({ price: a }, { price: b }) => Number(a) - Number(b)
+        )
+      );
+    } else if (sortSelectData === priceDescending) {
+      setProductsData(
+        [...productsData].sort(
+          ({ price: a }, { price: b }) => Number(b) - Number(a)
+        )
+      );
+    } else if (sortSelectData === newest) {
+      fetchData();
+    }
+  }, [sortSelectData]);
+  console.log(productsData);
   return (
     <Container>
       <Navbar />
@@ -175,10 +202,14 @@ const ProductList = () => {
           </Filter>
           <Filter>
             <FilterText>Sortuj Produkty:</FilterText>
-            <Select>
-              <Option disabled>Najnowsze</Option>
-              <Option>Cena rosnąco</Option>
-              <Option>Cena malejąco</Option>
+            <Select
+              onChange={(event) =>
+                setSortSelectData(String(event.target.value))
+              }
+            >
+              <Option value={newest}>Najnowsze</Option>
+              <Option value={priceAscending}>Cena rosnąco</Option>
+              <Option value={priceDescending}>Cena malejąco</Option>
             </Select>
           </Filter>
         </Filters>

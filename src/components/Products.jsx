@@ -48,7 +48,7 @@ const Products = () => {
       try {
         const querySnapshot = await getDocs(collection(db, "products"));
         querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          doc.data().theMostPopular && list.push({ id: doc.id, ...doc.data() });
         });
         setData(list);
       } catch (err) {
