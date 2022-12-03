@@ -8,6 +8,7 @@ import AboutMe from "./pages/AboutMe";
 import AdminProductList from "./pages/AdminPanel/ProductList";
 import CategoryAdding from "./pages/AdminPanel/CategoryAdding";
 import ProductAdding from "./pages/AdminPanel/ProductAdding";
+import LoginPage from "./pages/AdminPanel/LoginPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/admin/productlist" element={<AdminProductList />} />
       <Route path="/admin/categoryadding" element={<CategoryAdding />} />
       <Route path="/admin/productadding" element={<ProductAdding />} />
+      <Route path="/admin/loginpage" element={<LoginPage />} />
     </Routes>
   );
 };
