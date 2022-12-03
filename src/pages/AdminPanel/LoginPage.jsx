@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 const Container = styled.div``;
 const Input = styled.input``;
@@ -16,6 +18,11 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const { setSignedIn, signedIn } = useContext(UserContext);
+
+  useEffect(() => {
+    signedIn && navigate("/admin/productlist");
+  }, [signedIn]);
 
   const onSubmit = ({ email, password }) => {
     const logiAttempt = async () => {
@@ -24,7 +31,7 @@ const LoginPage = () => {
         await signInWithEmailAndPassword(auth, email, password).then(
           (userCredential) => {
             const user = userCredential.user;
-            user && navigate("/admin/productlist");
+            user && setSignedIn(true);
           }
         );
       } catch (err) {
