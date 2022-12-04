@@ -9,28 +9,9 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 const Container = styled.div`
   display: flex;
 `;
-const ProductList = styled.div``;
-const ProductName = styled.div``;
 
 const ProductAdding = () => {
   const { register, handleSubmit } = useForm();
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let list = [];
-      try {
-        const querySnapshot = await getDocs(collection(db, "products"));
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setData(list);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
 
   const [imagesUpload, setImagesUpload] = useState(null);
   const [imagesRef, setImagesRef] = useState(null);
@@ -121,11 +102,6 @@ const ProductAdding = () => {
         </select>
         <input type="submit" />
       </form>
-      <ProductList>
-        {data.map(({ id, displayName }) => (
-          <ProductName key={id}>{displayName}</ProductName>
-        ))}
-      </ProductList>
     </Container>
   );
 };

@@ -157,7 +157,6 @@ const ProductList = () => {
 
   const [sortSelectData, setSortSelectData] = useState();
 
-  console.log("sortSelectData1", sortSelectData);
   useEffect(() => {
     if (sortSelectData === priceAscending) {
       setProductsData(
@@ -175,7 +174,7 @@ const ProductList = () => {
       fetchData();
     }
   }, [sortSelectData]);
-  console.log(productsData);
+
   return (
     <Container>
       <Navbar />
