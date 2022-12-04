@@ -22,7 +22,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     signedIn && navigate("/admin/productlist");
-  }, [signedIn]);
+  }, [signedIn, navigate]);
 
   const onSubmit = ({ email, password }) => {
     const logiAttempt = async () => {
