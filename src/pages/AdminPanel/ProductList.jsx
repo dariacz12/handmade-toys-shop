@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import ProductAdding from "./ProductAdding";
 import { UserContext } from "../../context/UserContext";
+import {
+  ProductsContext,
+  ProductsActionsContext,
+} from "../../context/ProductsContext";
 
 const Contener = styled.div``;
 const Wrapper = styled.div`
@@ -32,8 +34,11 @@ const ButtonDelete = styled.button`
 `;
 const Menu = styled.div``;
 const MenuItem = styled.span``;
+
 const ProductList = () => {
-  const [data, setData] = useState([]);
+  const { data } = useContext(ProductsContext);
+  const { fetchData } = useContext(ProductsActionsContext);
+
   const { setSignedIn } = useContext(UserContext);
 
   const handleClick = () => {
@@ -41,18 +46,6 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      let list = [];
-      try {
-        const querySnapshot = await getDocs(collection(db, "products"));
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setData(list);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchData();
   }, []);
 
@@ -64,8 +57,8 @@ const ProductList = () => {
         </Link>
         <MenuItem onClick={handleClick}>Log out</MenuItem>
       </Menu>
+      <ProductAdding />
       <Wrapper>
-        <ProductAdding />
         {data.map((item) => (
           <Item key={item.id}>
             <Name>{item.displayName} </Name>

@@ -54,8 +54,6 @@ const ProductAdding = () => {
     setImagesRef(result2);
   };
 
-  console.log(imagesRef);
-
   const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
