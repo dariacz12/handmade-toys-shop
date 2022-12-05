@@ -7,6 +7,7 @@ import {
   ProductsContext,
   ProductsActionsContext,
 } from "../../context/ProductsContext";
+import { useState } from "react";
 
 const Contener = styled.div``;
 const Wrapper = styled.div`
@@ -28,26 +29,32 @@ const Name = styled.div`
 const Price = styled.div`
   margin: auto;
 `;
-const ButtonEdit = styled.button``;
-const ButtonDelete = styled.button`
+
+const Button = styled.button`
   margin-left: auto;
 `;
 const Menu = styled.div``;
 const MenuItem = styled.span``;
+const Input = styled.input``;
 
 const ProductList = () => {
   const { data } = useContext(ProductsContext);
-  const { fetchData } = useContext(ProductsActionsContext);
+  const { fetchData, deleteData, updateData } = useContext(
+    ProductsActionsContext
+  );
 
   const { setSignedIn } = useContext(UserContext);
-
-  const handleClick = () => {
-    setSignedIn(false);
-  };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const [newValue, setNewValue] = useState({});
+  const [editedItemId, setEditedItemId] = useState(false);
+
+  const editedItemIdEditBox = (id) => {
+    setEditedItemId(id);
+  };
 
   return (
     <Contener>
@@ -55,16 +62,49 @@ const ProductList = () => {
         <Link to={`/admin/categoryadding`}>
           <MenuItem>Kategorie</MenuItem>
         </Link>
-        <MenuItem onClick={handleClick}>Log out</MenuItem>
+        <MenuItem onClick={() => setSignedIn(false)}>Log out</MenuItem>
       </Menu>
       <ProductAdding />
       <Wrapper>
         {data.map((item) => (
           <Item key={item.id}>
-            <Name>{item.displayName} </Name>
+            <Name>{item.displayName}</Name>
             <Price>{item.price}</Price>
-            <ButtonEdit>Edit</ButtonEdit>
-            <ButtonDelete>Delete</ButtonDelete>
+            <Button onClick={() => editedItemIdEditBox(item.id)}>Edit</Button>
+            <Button onClick={() => deleteData(item.id)}>Delete</Button>
+
+            {editedItemId === item.id && (
+              <Wrapper>
+                <Input
+                  type="text"
+                  placeholder="Put new product name"
+                  onChange={(e) =>
+                    setNewValue({ ...newValue, name: e.target.value })
+                  }
+                ></Input>
+                <Input
+                  type="number"
+                  placeholder="Put new price"
+                  onChange={(e) =>
+                    setNewValue({ ...newValue, price: e.target.value })
+                  }
+                ></Input>
+                <Button
+                  onClick={() => {
+                    updateData(item.id, newValue);
+                  }}
+                >
+                  Update
+                </Button>
+                <Button
+                  onClick={() => {
+                    setEditedItemId(false);
+                  }}
+                >
+                  X
+                </Button>
+              </Wrapper>
+            )}
           </Item>
         ))}
       </Wrapper>
