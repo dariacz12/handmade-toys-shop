@@ -1,16 +1,22 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { db } from "../../firebase";
 import { storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  CategoryActionsContext,
+  CategoryContext,
+} from "../../context/CategoryContext";
 
 const Container = styled.div`
   display: flex;
 `;
 
 const ProductAdding = () => {
+  const { data } = useContext(CategoryContext);
+  const { fetchData } = useContext(CategoryActionsContext);
   const { register, handleSubmit } = useForm();
 
   const [imagesUpload, setImagesUpload] = useState(null);
@@ -22,7 +28,6 @@ const ProductAdding = () => {
     { displayName, description, price, categoryId },
     imagesRef
   ) => {
-    console.log(1, imagesRef);
     try {
       const docRef = await addDoc(collection(db, "products"), {
         displayName,
@@ -54,21 +59,7 @@ const ProductAdding = () => {
     setImagesRef(result2);
   };
 
-  const [categoryData, setCategoryData] = useState([]);
-
   useEffect(() => {
-    const fetchData = async () => {
-      let list = [];
-      try {
-        const querySnapshot = await getDocs(collection(db, "categories"));
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setCategoryData(list);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchData();
   }, []);
 
@@ -91,7 +82,7 @@ const ProductAdding = () => {
         </button>
         <input {...register("price")} />
         <select {...register("categoryId")}>
-          {categoryData.map(({ categoryName, id }) => (
+          {data.map(({ categoryName, id }) => (
             <option value={id} key={categoryName}>
               {categoryName}
             </option>
