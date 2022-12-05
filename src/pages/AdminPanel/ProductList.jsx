@@ -72,7 +72,6 @@ const ProductList = () => {
             <Price>{item.price}</Price>
             <Button onClick={() => editedItemIdEditBox(item.id)}>Edit</Button>
             <Button onClick={() => deleteData(item.id)}>Delete</Button>
-
             {editedItemId === item.id && (
               <Wrapper>
                 <Input
