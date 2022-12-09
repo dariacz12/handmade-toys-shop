@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createContext } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const CategoryContext = createContext({
@@ -9,6 +9,7 @@ export const CategoryContext = createContext({
 
 export const CategoryActionsContext = createContext({
   fetchData: () => {},
+  addData: () => {},
 });
 
 export const CategoryContextProvider = ({ children }) => {
@@ -27,9 +28,20 @@ export const CategoryContextProvider = ({ children }) => {
     }
   };
 
+  const addData = async ({ categoryName }) => {
+    try {
+      const docRef = await addDoc(collection(db, "categories"), {
+        categoryName,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <CategoryContext.Provider value={{ data }}>
-      <CategoryActionsContext.Provider value={{ fetchData }}>
+      <CategoryActionsContext.Provider value={{ fetchData, addData }}>
         {children}
       </CategoryActionsContext.Provider>
     </CategoryContext.Provider>

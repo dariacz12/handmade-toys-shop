@@ -113,6 +113,8 @@ const ImageMain = styled.img`
 const InfoContainer = styled.div`
   flex: 1;
   min-width: 250px;
+  display: flex;
+  flex-direction: column;
 
   @media ${devices.laptopL} {
     padding: 0px 50px;
@@ -136,6 +138,24 @@ const Price = styled.span`
   font-size: 30px;
   @media ${devices.laptopL} {
     font-size: 40px;
+  }
+`;
+const Materials = styled.span`
+  margin: 20px 0px;
+  color: gray;
+  text-align: justify;
+  font-size: 14px;
+  @media ${devices.mobileL} {
+    font-size: 16px;
+  }
+`;
+const Dimensions = styled.span`
+  margin: 0px 0px 20px 0px;
+  color: gray;
+  text-align: justify;
+  font-size: 14px;
+  @media ${devices.mobileL} {
+    font-size: 16px;
   }
 `;
 const ProductPage = () => {
@@ -217,6 +237,14 @@ const ProductPage = () => {
           <InfoContainer>
             <Title>{data.displayName}</Title>
             <Description>{data.description}</Description>
+            <Materials>
+              <span style={{ color: "black" }}>Materiały: </span>{" "}
+              {data.materials}
+            </Materials>
+            <Dimensions>
+              <span style={{ color: "black" }}>Wymiary: </span>{" "}
+              {data.dimensions}
+            </Dimensions>
             <Price>{data.price} PLN</Price>
           </InfoContainer>
         </Wrapper>

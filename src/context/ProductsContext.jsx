@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createContext } from "react";
 import { db } from "../firebase";
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -16,11 +17,11 @@ export const ProductsActionsContext = createContext({
   fetchData: () => {},
   deleteData: () => {},
   updateData: () => {},
+  addData: () => {},
 });
 
 export const ProductsContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
-
   const fetchData = async () => {
     let list = [];
     try {
@@ -29,6 +30,27 @@ export const ProductsContextProvider = ({ children }) => {
         list.push({ id: doc.id, ...doc.data() });
       });
       setData(list);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addData = async (
+    { displayName, description, price, categoryId, dimensions, materials },
+    imagesRef
+  ) => {
+    try {
+      const docRef = await addDoc(collection(db, "products"), {
+        displayName,
+        description,
+        price,
+        imagesRef,
+        categoryId,
+        dimensions,
+        materials,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      fetchData();
     } catch (err) {
       console.log(err);
     }
@@ -43,11 +65,17 @@ export const ProductsContextProvider = ({ children }) => {
     fetchData();
   };
 
-  const updateData = async (id, { name, price }) => {
+  const updateData = async (
+    id,
+    { displayName, price, description, materials, dimensions }
+  ) => {
     try {
       await updateDoc(doc(db, "products", id), {
-        displayName: name,
-        price: price,
+        ...(displayName ? { displayName } : {}),
+        ...(price ? { price } : {}),
+        ...(description ? { description } : {}),
+        ...(materials ? { materials } : {}),
+        ...(dimensions ? { dimensions } : {}),
       });
     } catch (err) {
       console.log(err);
@@ -58,7 +86,7 @@ export const ProductsContextProvider = ({ children }) => {
   return (
     <ProductsContext.Provider value={{ data }}>
       <ProductsActionsContext.Provider
-        value={{ fetchData, deleteData, updateData }}
+        value={{ fetchData, deleteData, updateData, addData }}
       >
         {children}
       </ProductsActionsContext.Provider>

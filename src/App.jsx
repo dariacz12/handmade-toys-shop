@@ -5,14 +5,15 @@ import ContactPage from "./pages/ContactPage";
 import ProductList from "./pages/ProductList";
 import ProductPage from "./pages/ProductPage";
 import AboutMe from "./pages/AboutMe";
-import AdminProductList from "./pages/AdminPanel/ProductList";
-import CategoryAdding from "./pages/AdminPanel/CategoryAdding";
-import ProductAdding from "./pages/AdminPanel/ProductAdding";
+import AdminProductList from "./pages/AdminPanel/ProductListPage";
+import CategoryAddingPage from "./pages/AdminPanel/CategoryAddingPage";
+import ProductAddingPage from "./pages/AdminPanel/ProductAddingPage";
 import LoginPage from "./pages/AdminPanel/LoginPage";
 import Protected from "./components/Protected";
 import { UserContextProvider } from "./context/UserContext";
 import { ProductsContextProvider } from "./context/ProductsContext";
 import { CategoryContextProvider } from "./context/CategoryContext";
+import ProductEditPage from "./pages/AdminPanel/ProductEditPage";
 
 const App = () => {
   return (
@@ -28,12 +29,22 @@ const App = () => {
             <Route path="/productpage/:id" element={<ProductPage />} />
             <Route path="/admin/loginpage" element={<LoginPage />} />
             <Route element={<Protected />}>
-              <Route path="/admin/productlist" element={<AdminProductList />} />
               <Route
-                path="/admin/categoryadding"
-                element={<CategoryAdding />}
+                path="/admin/productlistpage"
+                element={<AdminProductList />}
               />
-              <Route path="/admin/productadding" element={<ProductAdding />} />
+              <Route
+                path="/admin/categoryaddingpage"
+                element={<CategoryAddingPage />}
+              />
+              <Route
+                path="/admin/productaddingpage"
+                element={<ProductAddingPage />}
+              />
+              <Route
+                path="/admin/producteditpage/:id"
+                element={<ProductEditPage />}
+              />
             </Route>
           </Routes>
         </ProductsContextProvider>
