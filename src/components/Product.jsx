@@ -22,7 +22,7 @@ const Image = styled.img`
 const Product = ({ item }) => {
   return (
     <Container>
-      {item.imagesRef.length && <Image src={item.imagesRef[0]} />}
+      {item.imagesRef?.length && <Image src={item.imagesRef[0]} />}
     </Container>
   );
 };
